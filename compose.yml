@@ -1,0 +1,78 @@
+services:
+
+    # sonarr
+    Sonarr:
+        container_name: Sonarr-8989
+        image: cr.hotio.dev/hotio/sonarr
+        network_mode: host
+        volumes:
+            - /var/opt/servarr/config/sonarr:/config
+            - /var/opt/servarr/data/sonarr:/data
+        environment:
+            - PUID=111
+            - PGID=321
+            - UMASK=002
+
+    # radarr
+    Radarr:
+        container_name: Radarr-7878
+        image: cr.hotio.dev/hotio/radarr
+        network_mode: host
+        volumes:
+            - /var/opt/servarr/config/radarr:/config
+            - /var/opt/servarr/data/radarr:/data
+        environment:
+            - PUID=222
+            - PGID=321
+            - UMASK=002
+
+    # bazarr
+    Bazarr:
+        container_name: Bazarr-6767
+        image: cr.hotio.dev/hotio/bazarr
+        network_mode: host
+        volumes:
+            - /var/opt/servarr/config/bazarr:/config
+            - /var/opt/servarr/data/bazarr:/data
+        environment:
+            - PUID=333
+            - PGID=321
+            - UMASK=002
+
+    Jackett:
+        container_name: Jackett-9117
+        image: cr.hotio.dev/hotio/jackett
+        network_mode: host
+        volumes:
+            - /var/opt/servarr/config/jackett:/config
+            - /var/opt/servarr/data/jackett:/data
+        environment:
+            - PUID=444
+            - PGID=321
+            - UMASK=002
+
+    # Transmission
+    qBittorrent:
+        container_name: qBittorrent-8080
+        image: cr.hotio.dev/hotio/qbittorrent
+        network_mode: host
+        volumes:
+            - /var/opt/servarr/config/qbittorrent:/config
+        environment:
+            - PUID=555
+            - PGID=321
+            - UMASK=002
+
+    # plex
+    Plex:
+        container_name: Plex-32400
+        image: cr.hotio.dev/hotio/plex
+        network_mode: host
+        volumes:
+            - /var/opt/servarr/config/plex:/config
+            - /var/opt/servarr/data/plex/media:/data/media
+            - /var/opt/servarr/data/plex/transcode:/transcode
+        environment:
+            - PUID=666
+            - PGID=321
+            - UMASK=002
