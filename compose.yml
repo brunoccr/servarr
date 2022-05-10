@@ -75,6 +75,7 @@ services:
         ports:
             - 32400:32400
         volumes:
+            - /var/opt/servarr/plex/config:/config
             - /var/opt/servarr/plex/transcode:/transcode
             - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/data/media
         environment:
