@@ -7,7 +7,8 @@ services:
         ports:
             - 8989:8989
         volumes:
-            - servarr_data:/servarr/sonarr
+            - servarr_data/sonarr/config:/config
+            - servarr_data/sonarr/data:/data
         environment:
             - PUID=111
             - PGID=321
@@ -20,7 +21,8 @@ services:
         ports:
             - 7878:7878
         volumes:
-            - servarr_data:/servarr/radarr
+            - servarr_data/radarr/config:/config
+            - servarr_data/radarr/data:/data
         environment:
             - PUID=222
             - PGID=321
