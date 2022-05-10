@@ -1,88 +1,103 @@
 services:
+  # sonarr
+  Sonarr:
+    container_name: Sonarr-8989
+    image: cr.hotio.dev/hotio/sonarr
+    ports:
+      - 8989:8989
+    volumes:
+      - /var/opt/servarr/sonarr/config:/config
+      - /var/opt/servarr/sonarr/data:/data
+      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+      - /var/opt/servarr/qbittorrent/downloads:/downloads
+    environment:
+      - PUID=111
+      - PGID=321
+      - UMASK=002
 
-    # sonarr
-    Sonarr:
-        container_name: Sonarr-8989
-        image: cr.hotio.dev/hotio/sonarr
-        ports:
-            - 8989:8989
-        volumes:
-            - /var/opt/servarr/sonarr/config:/config
-            - /var/opt/servarr/sonarr/data:/data
-            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
-        environment:
-            - PUID=111
-            - PGID=321
-            - UMASK=002
+  # radarr
+  Radarr:
+    container_name: Radarr-7878
+    image: cr.hotio.dev/hotio/radarr
+    ports:
+      - 7878:7878
+    volumes:
+      - /var/opt/servarr/radarr/config:/config
+      - /var/opt/servarr/radarr/data:/data
+      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+      - /var/opt/servarr/qbittorrent/downloads:/downloads
+    environment:
+      - PUID=222
+      - PGID=321
+      - UMASK=002
 
-    # radarr
-    Radarr:
-        container_name: Radarr-7878
-        image: cr.hotio.dev/hotio/radarr
-        ports:
-            - 7878:7878
-        volumes:
-            - /var/opt/servarr/radarr/config:/config
-            - /var/opt/servarr/radarr/data:/data
-            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
-        environment:
-            - PUID=222
-            - PGID=321
-            - UMASK=002
+  # bazarr
+  Bazarr:
+    container_name: Bazarr-6767
+    image: cr.hotio.dev/hotio/bazarr
+    ports:
+      - 6767:6767
+    volumes:
+      - /var/opt/servarr/bazarr/config:/config
+      - /var/opt/servarr/bazarr/data:/data
+      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+    environment:
+      - PUID=333
+      - PGID=321
+      - UMASK=002
 
-    # bazarr
-    Bazarr:
-        container_name: Bazarr-6767
-        image: cr.hotio.dev/hotio/bazarr
-        ports:
-            - 6767:6767
-        volumes:
-            - /var/opt/servarr/bazarr/config:/config
-            - /var/opt/servarr/bazarr/data:/data
-            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
-        environment:
-            - PUID=333
-            - PGID=321
-            - UMASK=002
+  Jackett:
+    container_name: Jackett-9117
+    image: cr.hotio.dev/hotio/jackett
+    ports:
+      - 9117:9117
+    volumes:
+      - /var/opt/servarr/jackett/config:/config
+      - /var/opt/servarr/jackett/data:/data
+    environment:
+      - PUID=444
+      - PGID=321
+      - UMASK=002
 
-    Jackett:
-        container_name: Jackett-9117
-        image: cr.hotio.dev/hotio/jackett
-        ports:
-            - 9117:9117
-        volumes:
-            - /var/opt/servarr/jackett/config:/config
-            - /var/opt/servarr/jackett/data:/data
-        environment:
-            - PUID=444
-            - PGID=321
-            - UMASK=002
+  # qbittorrent
+  qBittorrent:
+    container_name: qBittorrent-8080
+    image: cr.hotio.dev/hotio/qbittorrent
+    ports:
+      - 8080:8080
+    volumes:
+      - /var/opt/servarr/qbittorrent/config:/config
+      - /var/opt/servarr/qbittorrent/downloads:/app/qBittorrent/downloads
+    environment:
+      - PUID=555
+      - PGID=321
+      - UMASK=002
 
-    # qBittorrent
-    qBittorrent:
-        container_name: qBittorrent-8080
-        image: cr.hotio.dev/hotio/qbittorrent
-        ports:
-            - 8080:8080
-        volumes:
-            - /var/opt/servarr/qbittorrent/config:/config
-            - /var/opt/servarr/qbittorrent/downloads:/app/qBittorrent/downloads
-        environment:
-            - PUID=555
-            - PGID=321
-            - UMASK=002
+  # nzbget
+  NZBGet:
+    container_name: NZBGet
+    image: cr.hotio.dev/hotio/nzbget
+    ports:
+      - 6789:6789
+    volumes:
+      - /var/opt/servarr/nzbget/config:/config
+      - /var/opt/servarr/nzbget/downloads:/downloads/nzb
+    environment:
+      - PUID=777
+      - PGID=321
+      - UMASK=002
 
-    # plex
-    Plex:
-        container_name: Plex-32400
-        image: cr.hotio.dev/hotio/plex
-        ports:
-            - 32400:32400
-        volumes:
-            - /var/opt/servarr/plex/config:/config
-            - /var/opt/servarr/plex/transcode:/transcode
-            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
-        environment:
-            - PUID=666
-            - PGID=321
-            - UMASK=002
+  # plex
+  Plex:
+    container_name: Plex-32400
+    image: cr.hotio.dev/hotio/plex
+    ports:
+      - 32400:32400
+    volumes:
+      - /var/opt/servarr/plex/config:/config
+      - /var/opt/servarr/plex/transcode:/transcode
+      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+    environment:
+      - PUID=666
+      - PGID=321
+      - UMASK=002
