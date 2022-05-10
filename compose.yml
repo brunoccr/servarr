@@ -51,7 +51,7 @@ services:
             - PGID=321
             - UMASK=002
 
-    # Transmission
+    # qBittorrent
     qBittorrent:
         container_name: qBittorrent-8080
         image: cr.hotio.dev/hotio/qbittorrent
