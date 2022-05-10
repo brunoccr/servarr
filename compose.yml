@@ -9,6 +9,7 @@ services:
         volumes:
             - /var/opt/servarr/sonarr/config:/config
             - /var/opt/servarr/sonarr/data:/data
+            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
         environment:
             - PUID=111
             - PGID=321
@@ -23,6 +24,7 @@ services:
         volumes:
             - /var/opt/servarr/radarr/config:/config
             - /var/opt/servarr/radarr/data:/data
+            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
         environment:
             - PUID=222
             - PGID=321
@@ -37,6 +39,7 @@ services:
         volumes:
             - /var/opt/servarr/bazarr/config:/config
             - /var/opt/servarr/bazarr/data:/data
+            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
         environment:
             - PUID=333
             - PGID=321
@@ -78,7 +81,7 @@ services:
         volumes:
             - /var/opt/servarr/plex/config:/config
             - /var/opt/servarr/plex/transcode:/transcode
-            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/data/media
+            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
         environment:
             - PUID=666
             - PGID=321
