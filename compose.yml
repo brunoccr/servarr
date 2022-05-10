@@ -10,6 +10,7 @@ services:
       - /var/opt/servarr/sonarr/data:/data
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
       - /var/opt/servarr/qbittorrent/downloads:/downloads
+      - /var/opt/servarr/nzbget/downloads:/downloads/nzb
     environment:
       - PUID=111
       - PGID=321
@@ -25,7 +26,7 @@ services:
       - /var/opt/servarr/radarr/config:/config
       - /var/opt/servarr/radarr/data:/data
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
-      - /var/opt/servarr/qbittorrent/downloads:/downloads
+      - /var/opt/servarr/nzbget/downloads:/downloads/nzb
     environment:
       - PUID=222
       - PGID=321
@@ -59,7 +60,7 @@ services:
       - PGID=321
       - UMASK=002
 
-  # qbittorrent
+  # qBittorrent
   qBittorrent:
     container_name: qBittorrent-8080
     image: cr.hotio.dev/hotio/qbittorrent
@@ -75,13 +76,13 @@ services:
 
   # nzbget
   NZBGet:
-    container_name: NZBGet
+    container_name: NZBGet-6789
     image: cr.hotio.dev/hotio/nzbget
     ports:
       - 6789:6789
     volumes:
       - /var/opt/servarr/nzbget/config:/config
-      - /var/opt/servarr/nzbget/downloads:/downloads/nzb
+      - /var/opt/servarr/nzbget/downloads:/config/downloads
     environment:
       - PUID=777
       - PGID=321
@@ -101,3 +102,4 @@ services:
       - PUID=666
       - PGID=321
       - UMASK=002
+      - PLEX_CLAIM=claim-1tNdkZsL7iycmuNhWHj8
