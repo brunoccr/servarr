@@ -63,6 +63,7 @@ services:
             - 8080:8080
         volumes:
             - /var/opt/servarr/qbittorrent/config:/config
+            - /var/opt/servarr/qbittorrent/downloads:/app/qBittorrent/downloads
         environment:
             - PUID=555
             - PGID=321
