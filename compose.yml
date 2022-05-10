@@ -4,10 +4,10 @@ services:
     Sonarr:
         container_name: Sonarr-8989
         image: cr.hotio.dev/hotio/sonarr
-        network_mode: host
+        ports:
+            - 8989:8989
         volumes:
-            - /var/opt/servarr/config/sonarr:/config
-            - /var/opt/servarr/data/sonarr:/data
+            - servarr_data:/servarr/sonarr
         environment:
             - PUID=111
             - PGID=321
@@ -17,10 +17,10 @@ services:
     Radarr:
         container_name: Radarr-7878
         image: cr.hotio.dev/hotio/radarr
-        network_mode: host
+        ports:
+            - 7878:7878
         volumes:
-            - /var/opt/servarr/config/radarr:/config
-            - /var/opt/servarr/data/radarr:/data
+            - servarr_data:/servarr/radarr
         environment:
             - PUID=222
             - PGID=321
@@ -30,10 +30,10 @@ services:
     Bazarr:
         container_name: Bazarr-6767
         image: cr.hotio.dev/hotio/bazarr
-        network_mode: host
+        ports:
+            - 6767:6767
         volumes:
-            - /var/opt/servarr/config/bazarr:/config
-            - /var/opt/servarr/data/bazarr:/data
+            - servarr_data:/servarr/bazarr
         environment:
             - PUID=333
             - PGID=321
@@ -42,10 +42,10 @@ services:
     Jackett:
         container_name: Jackett-9117
         image: cr.hotio.dev/hotio/jackett
-        network_mode: host
+        ports:
+            - 9117:9117
         volumes:
-            - /var/opt/servarr/config/jackett:/config
-            - /var/opt/servarr/data/jackett:/data
+            - servarr_data:/servarr/jackett
         environment:
             - PUID=444
             - PGID=321
@@ -55,9 +55,10 @@ services:
     qBittorrent:
         container_name: qBittorrent-8080
         image: cr.hotio.dev/hotio/qbittorrent
-        network_mode: host
+        ports:
+            - 8080:8080
         volumes:
-            - /var/opt/servarr/config/qbittorrent:/config
+            - servarr_data:/servarr/qbittorrent
         environment:
             - PUID=555
             - PGID=321
@@ -67,12 +68,16 @@ services:
     Plex:
         container_name: Plex-32400
         image: cr.hotio.dev/hotio/plex
-        network_mode: host
+        ports:
+            - 32400:32400
         volumes:
-            - /var/opt/servarr/config/plex:/config
-            - /var/opt/servarr/data/plex/media:/data/media
-            - /var/opt/servarr/data/plex/transcode:/transcode
+            - servarr_data:/servarr/plex
+            - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/data/media
         environment:
             - PUID=666
             - PGID=321
             - UMASK=002
+
+volumes:
+    servarr_data:
+        external: true
