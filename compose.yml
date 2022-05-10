@@ -7,8 +7,8 @@ services:
         ports:
             - 8989:8989
         volumes:
-            - servarr_data/sonarr/config:/config
-            - servarr_data/sonarr/data:/data
+            - /var/opt/servarr/sonarr/config:/config
+            - /var/opt/servarr/sonarr/data:/data
         environment:
             - PUID=111
             - PGID=321
@@ -21,8 +21,8 @@ services:
         ports:
             - 7878:7878
         volumes:
-            - servarr_data/radarr/config:/config
-            - servarr_data/radarr/data:/data
+            - /var/opt/servarr/radarr/config:/config
+            - /var/opt/servarr/radarr/data:/data
         environment:
             - PUID=222
             - PGID=321
@@ -35,7 +35,8 @@ services:
         ports:
             - 6767:6767
         volumes:
-            - servarr_data:/servarr/bazarr
+            - /var/opt/servarr/bazarr/config:/config
+            - /var/opt/servarr/bazarr/data:/data
         environment:
             - PUID=333
             - PGID=321
@@ -47,7 +48,8 @@ services:
         ports:
             - 9117:9117
         volumes:
-            - servarr_data:/servarr/jackett
+            - /var/opt/servarr/jackett/config:/config
+            - /var/opt/servarr/jackett/data:/data
         environment:
             - PUID=444
             - PGID=321
@@ -60,7 +62,7 @@ services:
         ports:
             - 8080:8080
         volumes:
-            - servarr_data:/servarr/qbittorrent
+            - /var/opt/servarr/qbittorrent/config:/config
         environment:
             - PUID=555
             - PGID=321
@@ -73,13 +75,9 @@ services:
         ports:
             - 32400:32400
         volumes:
-            - servarr_data:/servarr/plex
+            - /var/opt/servarr/plex/transcode:/transcode
             - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/data/media
         environment:
             - PUID=666
             - PGID=321
             - UMASK=002
-
-volumes:
-    servarr_data:
-        external: true
