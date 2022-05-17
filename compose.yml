@@ -1,13 +1,31 @@
 services:
-  # localtunnel
-  Localtunnel:
-    image: efrecon/localtunnel
-    container_name: LocalTunnel
+  # ddclient
+  DDClient:
+    image: linuxserver/ddclient
+    container_name: DNSClient
+    restart: unless-stopped
     networks:
       - net_ext
     links:
       - Proxy
-    command: --local-host Proxy-80 --port 80 --subdomain bt-server
+    volumes:
+      - /var/opt/servarr/ddclient/config:/config
+    environment:
+      - PUID=1002
+      - PGID=992
+      - TZ=America/Sao_Paulo
+
+  # localtunnel
+  #Localtunnel:
+  #  image: efrecon/localtunnel
+  #  container_name: LocalTunnel
+  #  restart: always
+  #  networks:
+  #    - net_ext
+  #  links:
+  #    - Proxy
+  #  command:
+  #    --local-host Proxy-80 --port 80 --subdomain bt-server
 
   # proxy
   Proxy:
@@ -143,21 +161,21 @@ services:
       - PLEX_CLAIM=claim-1tNdkZsL7iycmuNhWHj8
 
   # handbrake
-  Handbrake:
-    container_name: Handbrake-5800
-    image: jlesage/handbrake
-    networks:
-      - net
-    ports:
-      - 5800:5800
-    volumes:
-      - /var/opt/servarr/handbrake/config:/config
-      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/storage
-      - /var/opt/servarr/handbrake/watch:/watch
-      - /var/opt/servarr/handbrake/output:/output
-    environment:
-      - PUID=1002
-      - PGID=992
+  #Handbrake:
+  #  container_name: Handbrake-5800
+  #  image: jlesage/handbrake
+  #  networks:
+  #    - net
+  #  ports:
+  #    - 5800:5800
+  #  volumes:
+  #    - /var/opt/servarr/handbrake/config:/config
+  #    - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/storage
+  #    - /var/opt/servarr/handbrake/watch:/watch
+  #    - /var/opt/servarr/handbrake/output:/output
+  #  environment:
+  #    - PUID=1002
+  #    - PGID=992
 
   # duplicati
   Duplicati:
@@ -171,6 +189,7 @@ services:
       - /var/opt/servarr/duplicati/config:/config
       - /var/opt/duplicati/backups:/backups
       - /var/opt/servarr:/source
+      - /etc/openmediavault:/omv
     environment:
       - PUID=1002
       - PGID=992
