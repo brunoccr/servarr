@@ -31,7 +31,7 @@ services:
   # sonarr
   Sonarr:
     container_name: Sonarr-8989
-    image: cr.hotio.dev/hotio/sonarr
+    image: linuxserver/sonarr
     restart: always
     networks:
       - net
@@ -49,7 +49,7 @@ services:
   # radarr
   Radarr:
     container_name: Radarr-7878
-    image: cr.hotio.dev/hotio/radarr
+    image: linuxserver/radarr
     restart: always
     networks:
       - net
@@ -67,7 +67,7 @@ services:
   # bazarr
   Bazarr:
     container_name: Bazarr-6767
-    image: cr.hotio.dev/hotio/bazarr
+    image: linuxserver/bazarr
     restart: always
     networks:
       - net
@@ -83,7 +83,7 @@ services:
   # jackett
   Jackett:
     container_name: Jackett-9117
-    image: cr.hotio.dev/hotio/jackett
+    image: linuxserver/jackett
     restart: always
     networks:
       - net
@@ -98,7 +98,7 @@ services:
   # qBittorrent
   qBittorrent:
     container_name: qBittorrent-8080
-    image: cr.hotio.dev/hotio/qbittorrent
+    image: linuxserver/qbittorrent
     restart: always
     networks:
       - net
@@ -115,7 +115,7 @@ services:
   # nzbget
   NZBGet:
     container_name: NZBGet-6789
-    image: cr.hotio.dev/hotio/nzbget
+    image: linuxserver/nzbget
     restart: always
     networks:
       - net
@@ -132,7 +132,7 @@ services:
   # plex
   #Plex:
   #  container_name: Plex-32400
-  #  image: cr.hotio.dev/hotio/plex
+  #  image: linuxserver/plex
   #  restart: always
   #  networks:
   #    - net
@@ -152,7 +152,7 @@ services:
   # jellyfin
   Jellyfin:
     container_name: Jellyfin-8096
-    image: cr.hotio.dev/hotio/jellyfin
+    image: linuxserver/jellyfin
     restart: always
     group_add:
       - 106
@@ -193,7 +193,7 @@ services:
   # duplicati
   Duplicati:
     container_name: Duplicati-8200
-    image: lscr.io/linuxserver/duplicati
+    image: linuxserver/duplicati
     networks:
       - net
     ports:
@@ -212,7 +212,7 @@ services:
   # duplicati
   #Duplicati-Restore:
   #  container_name: Duplicati-Restore
-  #  image: lscr.io/linuxserver/duplicati
+  #  image: linuxserver/duplicati
   #  networks:
   #    - net
   #  ports:
