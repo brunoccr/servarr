@@ -9,7 +9,7 @@ services:
     links:
       - Proxy
     volumes:
-      - /var/opt/servarr/ddclient/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/ddclient/config:/config
     environment:
       - PUID=1002
       - PGID=1002
@@ -26,7 +26,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - /var/opt/servarr/proxy/nginx-conf:/etc/nginx/conf.d
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/proxy/nginx-conf:/etc/nginx/conf.d
 
   # sonarr
   Sonarr:
@@ -36,8 +36,8 @@ services:
     networks:
       - net
     volumes:
-      - /var/opt/servarr/sonarr/config:/config
-      - /var/opt/servarr/sonarr/data:/data
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/sonarr/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/sonarr/data:/data
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
       - /var/opt/servarr/qbittorrent/downloads:/downloads
       - /var/opt/servarr/nzbget/downloads:/downloads/nzb
@@ -54,8 +54,8 @@ services:
     networks:
       - net
     volumes:
-      - /var/opt/servarr/radarr/config:/config
-      - /var/opt/servarr/radarr/data:/data
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/radarr/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/radarr/data:/data
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
       - /var/opt/servarr/qbittorrent/downloads:/downloads
       - /var/opt/servarr/nzbget/downloads:/downloads/nzb
@@ -72,8 +72,8 @@ services:
     networks:
       - net
     volumes:
-      - /var/opt/servarr/bazarr/config:/config
-      - /var/opt/servarr/bazarr/data:/data
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/bazarr/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/bazarr/data:/data
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
     environment:
       - PUID=1002
@@ -88,8 +88,8 @@ services:
     networks:
       - net
     volumes:
-      - /var/opt/servarr/jackett/config:/config
-      - /var/opt/servarr/jackett/data:/data
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/jackett/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/jackett/data:/data
     environment:
       - PUID=1002
       - PGID=1002
@@ -105,7 +105,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - /var/opt/servarr/qbittorrent/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/qbittorrent/config:/config
       - /var/opt/servarr/qbittorrent/downloads:/app/qBittorrent/downloads
     environment:
       - PUID=1002
@@ -122,7 +122,7 @@ services:
     ports:
       - 6789:6789
     volumes:
-      - /var/opt/servarr/nzbget/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/nzbget/config:/config
       - /var/opt/servarr/nzbget/downloads:/config/downloads
     environment:
       - PUID=1002
@@ -139,7 +139,7 @@ services:
     ports:
       - 32400:32400
     volumes:
-      - /var/opt/servarr/plex/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/plex/config:/config
       - /var/opt/servarr/plex/transcode:/transcode
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
 
@@ -199,9 +199,9 @@ services:
     ports:
       - 8200:8200
     volumes:
-      - /var/opt/servarr/duplicati/config:/config
-      - /var/opt/duplicati/backups:/backups
-      - /var/opt/servarr:/source
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr/duplicati/config:/config
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/duplicati/backups:/backups
+      - /srv/dev-disk-by-uuid-324ee625-370e-4ef0-8379-c84b98c9a8c5/servarr:/source
       - /etc/openmediavault:/omv
     environment:
       - PUID=1002
