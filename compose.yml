@@ -12,20 +12,8 @@ services:
       - /var/opt/servarr/ddclient/config:/config
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - TZ=America/Sao_Paulo
-
-  # localtunnel
-  #Localtunnel:
-  #  image: efrecon/localtunnel
-  #  container_name: LocalTunnel
-  #  restart: always
-  #  networks:
-  #    - net_ext
-  #  links:
-  #    - Proxy
-  #  command:
-  #    --local-host Proxy-80 --port 80 --subdomain bt-server
 
   # proxy
   Proxy:
@@ -55,7 +43,7 @@ services:
       - /var/opt/servarr/nzbget/downloads:/downloads/nzb
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
 
   # radarr
@@ -73,7 +61,7 @@ services:
       - /var/opt/servarr/nzbget/downloads:/downloads/nzb
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
 
   # bazarr
@@ -89,7 +77,7 @@ services:
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
 
   # jackett
@@ -104,7 +92,7 @@ services:
       - /var/opt/servarr/jackett/data:/data
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
 
   # qBittorrent
@@ -121,7 +109,7 @@ services:
       - /var/opt/servarr/qbittorrent/downloads:/app/qBittorrent/downloads
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
 
   # nzbget
@@ -138,7 +126,7 @@ services:
       - /var/opt/servarr/nzbget/downloads:/config/downloads
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
 
   # plex
@@ -154,11 +142,36 @@ services:
       - /var/opt/servarr/plex/config:/config
       - /var/opt/servarr/plex/transcode:/transcode
       - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - UMASK=002
       - PLEX_CLAIM=claim-1tNdkZsL7iycmuNhWHj8
+
+  # jellyfin
+  Jellyfin:
+    container_name: Jellyfin-8096
+    image: cr.hotio.dev/hotio/jellyfin
+    restart: always
+    group_add:
+      - 106
+    networks:
+      - net
+    ports:
+      - 8096:8096
+    volumes:
+      - /var/opt/servarr/jellyfin/config:/config
+      - /var/opt/servarr/jellyfin/cache:/cache
+      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+    devices:
+      # VAAPI Devices
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    environment:
+      - PUID=1002
+      - PGID=1002
+      - UMASK=002
 
   # handbrake
   #Handbrake:
@@ -175,7 +188,7 @@ services:
   #    - /var/opt/servarr/handbrake/output:/output
   #  environment:
   #    - PUID=1002
-  #    - PGID=992
+  #    - PGID=1002
 
   # duplicati
   Duplicati:
@@ -192,7 +205,7 @@ services:
       - /etc/openmediavault:/omv
     environment:
       - PUID=1002
-      - PGID=992
+      - PGID=1002
       - TZ=America/Sao_Paulo
     restart: unless-stopped
 
