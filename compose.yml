@@ -130,24 +130,24 @@ services:
       - UMASK=002
 
   # plex
-  Plex:
-    container_name: Plex-32400
-    image: cr.hotio.dev/hotio/plex
-    restart: always
-    networks:
-      - net
-    ports:
-      - 32400:32400
-    volumes:
-      - /var/opt/servarr/plex/config:/config
-      - /var/opt/servarr/plex/transcode:/transcode
-      - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
-
-    environment:
-      - PUID=1002
-      - PGID=1002
-      - UMASK=002
-      - PLEX_CLAIM=claim-1tNdkZsL7iycmuNhWHj8
+  #Plex:
+  #  container_name: Plex-32400
+  #  image: cr.hotio.dev/hotio/plex
+  #  restart: always
+  #  networks:
+  #    - net
+  #  ports:
+  #    - 32400:32400
+  #  volumes:
+  #    - /var/opt/servarr/plex/config:/config
+  #    - /var/opt/servarr/plex/transcode:/transcode
+  #    - /srv/dev-disk-by-uuid-fec73826-4d93-4b89-9413-e2c3168429fa/Plex:/media
+  #
+  #  environment:
+  #    - PUID=1002
+  #    - PGID=1002
+  #    - UMASK=002
+  #    - PLEX_CLAIM=claim-1tNdkZsL7iycmuNhWHj8
 
   # jellyfin
   Jellyfin:
