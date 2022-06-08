@@ -1,0 +1,44 @@
+#this stack use 1003 user
+
+services:
+  server:
+    container_name: corteza_server
+    image: cortezaproject/corteza:2022.3.2
+    restart: always
+    ports:
+      - 7070:80
+    depends_on:
+      - db
+    volumes:
+      - server:/data
+    environment:
+      - DOMAIN=192.168.15.2:7070
+      - DB_DSN=corteza:corteza@tcp(corteza_db:3306)/corteza?collation=utf8mb4_general_ci
+      - HTTP_WEBAPP_ENABLED=true
+
+  db:
+    container_name: corteza_db
+    image: percona:8.0
+
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_lib:/var/lib/mysql
+      - mysql_log:/var/log/mysql
+    environment:
+      - MYSQL_DATABASE=corteza
+      - MYSQL_USER=corteza
+      - MYSQL_PASSWORD=corteza
+      - MYSQL_RANDOM_ROOT_PASSWORD=corteza
+    healthcheck:
+      {
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost"],
+        timeout: 20s,
+        retries: 10,
+      }
+
+volumes:
+  mysql_lib:
+  mysql_log:
+  server:
