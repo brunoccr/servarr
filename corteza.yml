@@ -2,7 +2,7 @@
 
 services:
   server:
-    container_name: corteza_server
+    container_name: CortezaServer
     image: cortezaproject/corteza:2022.3.2
     restart: always
     ports:
@@ -17,7 +17,7 @@ services:
       - HTTP_WEBAPP_ENABLED=true
 
   db:
-    container_name: corteza_db
+    container_name: CortezaDB
     image: percona:8.0
 
     restart: always
